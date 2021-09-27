@@ -30,6 +30,7 @@ for i in range(7):
 max1 = 0
 max2 = 0
 i = 0
+ii = 0
 for el in computer:
     if el[0] == el[1]:
         if el[0] > max1:
@@ -40,6 +41,7 @@ i = 0
 el = 0
 # Проверка на дубль у игрока
 j = 0
+jj = 0
 for el in player:
     if el[0] == el[1]:
         if el[0] > max2:
@@ -59,7 +61,7 @@ else:
 smax1 = 0
 smax2 = 0
 i = 0
-if snake == []:
+if not snake:
     for el in computer:
         s1 = el[0] + el[1]
         if s1 > smax1:
@@ -80,7 +82,6 @@ if snake == []:
     else:
         snake.append(player[jj])
         player.remove(player[jj])
-# Цикл шагов игры
 
 
 def desk(stock, computer, player, snake):
