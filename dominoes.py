@@ -3,7 +3,9 @@ import random
 # Список всех домино
 all = [[2, 5], [1, 2], [3, 6], [0, 0], [0, 2], [5, 6], [3, 5], [2, 4], [3, 4], [1, 5], [0, 4], [2, 6], [3, 3], [1, 1],
        [1, 4], [1, 3], [2, 3], [4, 5], [2, 2], [0, 3], [0, 6], [5, 5], [4, 4], [4, 6], [0, 1], [0, 5], [1, 6], [6, 6]]
+
 random.shuffle(all)  # Перетасовка всего списка домино
+
 # Запасные домино
 stock = []
 for el in all:
@@ -12,6 +14,7 @@ for el in all:
     if el == all[13]:
         break
 el = 0
+
 # Набор домино компьютера
 computer = []
 for el in all:
@@ -20,11 +23,13 @@ for el in all:
     if el == all[6]:
         break
 el = 0
+
 # Оставшиеся домино для игрока
 player = []
 for i in range(7):
     player.append(all[0])
     all.pop(0)
+
 # Проверка на дубль у компьютера
 # snake - начальная доминошка
 max1 = 0
@@ -39,6 +44,7 @@ for el in computer:
     i += 1
 i = 0
 el = 0
+
 # Проверка на дубль у игрока
 j = 0
 jj = 0
@@ -57,6 +63,7 @@ if max1 > max2:
 else:
     snake.append(player[jj])
     player.remove(player[jj])
+
 # Случай, когда дубль не нашёлся и нужно определить самую большую доминошку
 smax1 = 0
 smax2 = 0
@@ -88,15 +95,18 @@ def desk(stock, computer, player, snake):
     print('======================================================================')
     print('Stock size:', len(stock))
     print('Computer pieces:', len(computer))
+
     if len(snake) > 6:
         print(snake[0], snake[1], snake[2], '...', snake[-3], snake[-2], snake[-1], sep='')
     else:
         print(*snake)
     print('Your pieces:')
     i = 1
+       
     for el in player:
         print(f'{i}: {el}')
         i += 1
+       
     # Определить, кто пойдёт первым
     if len(computer) > len(player):
         Status = 'computer'
@@ -127,6 +137,7 @@ def put_c(snake, computer):
         o_snake.append(snake[el][0])
         o_snake.append(snake[el][1])
     o_computer = []
+
     for ell in range(len(computer)):
         o_computer.append(computer[ell][0])
         o_computer.append(computer[ell][1])
@@ -157,6 +168,7 @@ def step(status, stock, computer, player, snake):
         print('Status: Computer is about to make a move. Press Enter to continue...')
         a = input()
         ball = put_c(snake, computer)
+              
         for i in ball:
             st_c = i
             if computer[st_c - 1][0] == snake[-1][1]:
@@ -167,6 +179,7 @@ def step(status, stock, computer, player, snake):
                 snake.append(computer.pop(st_c - 1))
                 break
             st_c = -st_c
+       
             if computer[abs(st_c) - 1][0] == snake[0][0]:
                 computer[abs(st_c) - 1][0], computer[abs(st_c) - 1][1] = computer[abs(st_c) - 1][1], \
                                                                          computer[abs(st_c) - 1][0]
@@ -219,6 +232,7 @@ def step(status, stock, computer, player, snake):
     for el in range(len(snake)):
         draw.append(snake[el][0])
         draw.append(snake[el][1])
+       
     if (draw[0] == draw[-1]) and (draw.count(draw[0]) == 8):
         status = 'draw'
 
